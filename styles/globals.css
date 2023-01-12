@@ -292,13 +292,18 @@ span.text-red {
 .footer-banner-container {
   padding: 100px 40px;
   background-color: #f02d34;
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0 ;
   position: relative;
   height: 400px;
   line-height: 1; 
   color: white;
   width: 100%;
   margin-top: 120px;
+}
+
+.footer-banner-container img {
+  max-height: 400px;
+  max-width: 400px;
 }
 
 .banner-desc {
@@ -322,7 +327,9 @@ span.text-red {
   margin-left: 25px;
 }
 .banner-desc .left p {
-  margin:18px;
+  margin: 18px;
+  font-weight: 400;
+  font-size: 20px;
 }
 .footer-banner-image {
   position: absolute;

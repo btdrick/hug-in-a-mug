@@ -8,7 +8,7 @@ const Home = ({ products, bannerData }) => (
 
     <div className='products-heading'>
       <h2>Best Selling Products</h2>
-      <p>Chocolate syrup for any type of sweet tooth</p>
+      <p>Chocolate goodies for any type of sweet tooth</p>
     </div>
 
     <div className='products-container'>
@@ -16,7 +16,7 @@ const Home = ({ products, bannerData }) => (
       key={product._id} product={product} />)}
     </div>
 
-    <FooterBanner />
+    <FooterBanner footerBanner={bannerData && bannerData[0]} />
   </div>
 );
 
