@@ -59,6 +59,16 @@ export const StateContext = ({ children}) => {
         }
     }
 
+    //Remove an item from the cart
+    const onRemove = (product) => {
+        foundProduct = cartItems.find((item) => item._id === product._id);
+        const newCartItems = cartItems.filter((item) => item._id !== product._id);
+
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
+        setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.quantity);
+        setCartItems(newCartItems);
+    }
+
     //Callback to increase product quantity
     const incQty = () => {
         setQty((prev) => prev + 1);
@@ -70,7 +80,7 @@ export const StateContext = ({ children}) => {
             if(prev - 1 < 1) return 1;
             return prev - 1;
         });
-    }   
+    }  
 
     return (
         //Provides access to state values accross components
@@ -85,6 +95,7 @@ export const StateContext = ({ children}) => {
                 incQty,
                 decQty,
                 onAdd,
+                onRemove,
                 toggleCartItemQuantity
             }}
         >

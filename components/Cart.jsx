@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const Cart = () => {
     const cartRef = useRef();
     const { totalPrice, totalQuantities, setShowCart, 
-        cartItems, toggleCartItemQuantity } = useStateContext();
+        cartItems, toggleCartItemQuantity, onRemove } = useStateContext();
     return (
         <div className='cart-wrapper' ref={cartRef}>
             <div className='cart-container'>
@@ -51,14 +51,14 @@ const Cart = () => {
                                             <span className='minus' 
                                             onClick={() => toggleCartItemQuantity(item._id, 'dec')}><AiOutlineMinus /></span> 
                                             <span className='num' 
-                                            onClick=''>{item.quantity}</span>
+                                            >{item.quantity}</span>
                                             <span className='plus' 
                                             onClick={() => toggleCartItemQuantity(item._id, 'inc')}><AiOutlinePlus /></span>                       
                                         </p>
                                     </div>
                                     <button type='button'
                                     className='remove-item'
-                                    onClick=''>
+                                    onClick={() => onRemove(item)}>
                                         <TiDeleteOutline />
                                     </button>
                                 </div>
