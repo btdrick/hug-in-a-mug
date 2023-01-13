@@ -1,15 +1,38 @@
 import React, { useRef } from 'react';
 import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../lib/client';
-import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
+import getStripe from '../lib/getStripe';
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 
 const Cart = () => {
     const cartRef = useRef();
     const { totalPrice, totalQuantities, setShowCart, 
         cartItems, toggleCartItemQuantity, onRemove } = useStateContext();
+    
+    const handleCheckout = async () => {
+        const stripe = await getStripe();
+
+        const response = await fetch('/api/stripe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartItems),
+        });
+
+        if(response.statusCode === 500) return;
+        
+        const data = await response.json();
+
+        toast.loading('Redirecting...');
+        console.log(data);
+
+        stripe.redirectToCheckout({ sessionId: data.id });
+    }
+
     return (
         <div className='cart-wrapper' ref={cartRef}>
             <div className='cart-container'>
