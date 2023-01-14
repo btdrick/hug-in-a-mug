@@ -25,7 +25,8 @@ export default async function handler(req, res) {
                     const img = item.image[0].asset._ref;
                     const newImage = img.
                         replace('image-', 'https://cdn.sanity.io/images/xhkgiaiq/production/').
-                        replace('-webp', '.webp');
+                        replace('-jpg', '.jpg').replace('-png', '.png');
+
                     //Get item price and quantity
                     return {
                         price_data: {

@@ -218,7 +218,7 @@ span.text-red {
   width: 100%;
 
 }
-.hero-banner-container .cocoa-syrup {
+.hero-banner-container .featured-product {
   font-size: 20px;
 }
 .hero-banner-container button {
@@ -247,8 +247,8 @@ span.text-red {
   position: absolute;
   top: 0%;
   right: 10%;
-  width: 450px;
-  height: 450px;
+  width: 400px;
+  height: 400px;
 }
 
 .desc {
@@ -301,11 +301,6 @@ span.text-red {
   margin-top: 120px;
 }
 
-.footer-banner-container img {
-  max-height: 400px;
-  max-width: 400px;
-}
-
 .banner-desc {
   display: flex ;
   justify-content: space-between;
@@ -334,7 +329,9 @@ span.text-red {
 .footer-banner-image {
   position: absolute;
   top: -25%;
-  left: 25%;
+  left: 30%;
+  max-height: 400px;
+  max-width: 400px;
 }
 .banner-desc .right {
   line-height: 1.4;
@@ -704,8 +701,8 @@ span.text-red {
     height: 560px;
   }
   .hero-banner-image {
-    width: 77%;
-    height: 62%;
+    width: 200px;
+    height: 200px;
     top: -2%;
     right: -6%;
   }
@@ -714,10 +711,10 @@ span.text-red {
     margin-top: 80px;
   }
   .footer-banner-image {
-    width: 77%;
-    left: 30%;
-    top: 6%;
-    height: 56%
+    top: -10%;
+    left: 50%;
+    height: 200px;
+    width: 200px;
   }
   .banner-desc .left h3 {
     font-weight: 900;

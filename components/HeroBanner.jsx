@@ -10,7 +10,7 @@ const HeroBanner = ({ heroBanner: { smallText, midText, largeText1, image, produ
     return (
         <div className='hero-banner-container'>
             <div>
-                <p className='cocoa-syrup'>{smallText}</p>
+                <p className='featured-product'>{smallText}</p>
                 <h3>{midText}</h3>
                 <h1>{largeText1}</h1>
                 <img src={urlFor(image)}
