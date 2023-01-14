@@ -3,6 +3,10 @@ import Head from 'next/head';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+/**
+ * Component serving as the application layout.
+ * @param {*} children component page props
+ */
 const Layout = ({ children }) => {
     return (
         <div className='layout'>
@@ -13,7 +17,7 @@ const Layout = ({ children }) => {
                 <Navbar />
             </header>
             <main className='main-container'>
-                { children }
+                {children}
             </main>
             <footer>
                 <Footer />

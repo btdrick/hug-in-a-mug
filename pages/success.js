@@ -1,9 +1,12 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateContext } from '../context/StateContext';
 import { BsBagCheckFill } from 'react-icons/bs';
 import { runConfetti } from '../lib/utils';
 import Link from 'next/link';
 
+/**
+ * The success page after a successful purchase.
+ */
 const Success = () => {
     const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
@@ -30,13 +33,13 @@ const Success = () => {
                     </a>
                 </p>
                 <Link href="/">
-                    <button type='button' 
-                    className='btn' 
-                    width='300px'>
-                    Continue Shopping
-                    </button> 
+                    <button type='button'
+                        className='btn'
+                        width='300px'>
+                        Continue Shopping
+                    </button>
                 </Link>
-            </div>  
+            </div>
         </div>
     );
 };

@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
-//Hook to create context for passing data
+/**
+ * Hook to create context for passing data
+ */
 const Context = createContext();
 
-export const StateContext = ({ children}) => {
+export const StateContext = ({ children }) => {
     const [showCart, setShowCart] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -20,12 +22,12 @@ export const StateContext = ({ children}) => {
         const checkProductInCart = cartItems.find((item) => item._id === product._id);
         setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
         setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
-        
+
         //Update quantity if product is already in cart, no duplicate products
         if (checkProductInCart) {
             const updatedCartItems = cartItems.map((cartProduct) => {
-                if(cartProduct._id === product._id) return {
-                    ...cartProduct, 
+                if (cartProduct._id === product._id) return {
+                    ...cartProduct,
                     quantity: cartProduct.quantity + quantity
                 }
             })
@@ -46,12 +48,12 @@ export const StateContext = ({ children}) => {
         //Keep all items besides item being updated
         const newCartItems = cartItems.filter((item) => item._id !== id);
 
-        if(value === 'inc') {
+        if (value === 'inc') {
             setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 }]);
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
             setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1);
         } else if (value === 'dec') {
-            if(foundProduct.quantity > 1) {
+            if (foundProduct.quantity > 1) {
                 setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1 }]);
                 setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
                 setTotalQuantities(prevTotalQuantities => prevTotalQuantities - 1);
@@ -77,10 +79,10 @@ export const StateContext = ({ children}) => {
     //Callback to decrease product quantity
     const decQty = () => {
         setQty((prev) => {
-            if(prev - 1 < 1) return 1;
+            if (prev - 1 < 1) return 1;
             return prev - 1;
         });
-    }  
+    }
 
     return (
         //Provides access to state values accross components
@@ -88,8 +90,8 @@ export const StateContext = ({ children}) => {
             value={{
                 showCart,
                 setShowCart,
-                cartItems, 
-                setCartItems, 
+                cartItems,
+                setCartItems,
                 totalPrice,
                 setTotalPrice,
                 totalQuantities,
