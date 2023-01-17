@@ -14,6 +14,7 @@ const ProductDetails = ({ product, products }) => {
     const { image, name, details, price } = product;
     const [index, setIndex] = useState(0);
     const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+    const pngImages = image.filter(image => image.asset._ref.endsWith("-png"));
 
     //Event handler for click Buy Now button
     const handleBuyNow = () => {
@@ -26,19 +27,28 @@ const ProductDetails = ({ product, products }) => {
             <div className='product-detail-container'>
                 <div>
                     <div className='image-container'>
-                        <img src={urlFor(image && image[index])}
+                        <img src={Object.keys(pngImages).length > 0 ? urlFor(pngImages && pngImages[index]) : urlFor(image && image[index])}
                             alt="product detailed image"
                             className='product-detail-image' />
                     </div>
                     <div className='small-images-container'>
-                        {image?.map((item, i) => (
+                        {/* Prioritize reference images with transparent background */}
+                        {Object.keys(pngImages).length > 0 ? (pngImages.map((item, i) => ( 
                             <img
-                                key={i}
-                                src={urlFor(item)}
-                                className={i === index ? 'small-image selected-image' :
-                                    'small-image'}
-                                onMouseEnter={() => setIndex(i)} />
-                        ))}
+                            key={i}
+                            src={urlFor(item)}
+                            className={i === index ? 'small-image selected-image' :
+                                'small-image'}
+                            onMouseEnter={() => setIndex(i)} /> ))
+                        ) : (
+                            image.map((item, i) => ( 
+                            <img
+                            key={i}
+                            src={urlFor(item)}
+                            className={i === index ? 'small-image selected-image' :
+                                'small-image'}
+                            onMouseEnter={() => setIndex(i)} /> ))
+                        )}
                     </div>
                 </div>
 
