@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateContext } from '../../context/StateContext';
 import { client, urlFor } from '../../lib/client';
 import { Product } from '../../components';
@@ -13,8 +13,13 @@ import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-
 const ProductDetails = ({ product, products }) => {
     const { image, name, details, price } = product;
     const [index, setIndex] = useState(0);
-    const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+    const { decQty, incQty, qty, setQty, onAdd, setShowCart } = useStateContext();
     const pngImages = image.filter(image => image.asset._ref.endsWith("-png"));
+
+    //Revert product quantity to 1 before leaving the page.
+    useEffect(() => {
+        window.addEventListener('beforeunload', setQty(1));
+      }, [])
 
     //Event handler for click Buy Now button
     const handleBuyNow = () => {
