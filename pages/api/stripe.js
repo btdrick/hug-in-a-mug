@@ -3,9 +3,10 @@ import Stripe from 'stripe';
 /**
  * Stripe API checkout page docs
  * https://stripe.com/docs/checkout/quickstart?client=next
+ * https://stripe.com/docs/api/checkout/sessions/object
  */
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
-
+  
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
@@ -20,12 +21,14 @@ export default async function handler(req, res) {
                     { shipping_rate: 'shr_1MPu7oEeTc5pXR3PJCWv2X1m' },
                     { shipping_rate: 'shr_1MPu8QEeTc5pXR3PTAack8m6' }
                 ],
+                allow_promotion_codes: true,
                 line_items: req.body.map((item) => {
                     //Retrieve image from sanity reference
                     const img = item.image[0].asset._ref;
                     const newImage = img.
                         replace('image-', 'https://cdn.sanity.io/images/xhkgiaiq/production/').
                         replace('-jpg', '.jpg').replace('-png', '.png');
+                
 
                     //Get item price and quantity
                     return {
